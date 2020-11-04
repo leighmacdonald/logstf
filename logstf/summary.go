@@ -707,7 +707,7 @@ func (s *LogSummary) LoadApiResponse(r *ApiResponse) error {
 // readLog handles reading and transforming the match from a file on disk into a populated LogSummary instance.
 // it will accept both a zip file and plain text log file as inputs.
 func readLog(logId int64) (*LogSummary, error) {
-	rawLogPath := path.Join(cacheDir, LogCacheFile(logId, ZipFormat))
+	rawLogPath := path.Join(CacheDir, LogCacheFile(logId, ZipFormat))
 	ls := NewSummary()
 	if strings.HasSuffix(strings.ToLower(rawLogPath), "zip") {
 		zf, err := zip.OpenReader(rawLogPath)
@@ -752,7 +752,7 @@ func readLog(logId int64) (*LogSummary, error) {
 
 func ReadJSON(logId int64) (*ApiResponse, error) {
 	var ar *ApiResponse
-	rawLogPath := path.Join(cacheDir, LogCacheFile(logId, JSONFormat))
+	rawLogPath := path.Join(CacheDir, LogCacheFile(logId, JSONFormat))
 	b, err := ioutil.ReadFile(rawLogPath)
 	if err != nil {
 		return nil, err
